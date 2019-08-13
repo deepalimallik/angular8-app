@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Department } from '../models/department.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Router } from '@angular/router';
 import { EmployeeService } from './employee.service';
 import { Employee } from '../models/employee.model';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -16,20 +17,22 @@ export class CreateEmployeeComponent implements OnInit {
 //isActive = true;
 //department = '1';
 
-employee: Employee = {
-    id: 4,
-    name: '',
-    gender: '',
-    contactPreference: '',
-    email: '',
-    dateOfBirth: new Date (),
-    department: '',
-    isActive: false,
-    photoPath: ''
-};
-previewPhoto: boolean;
+@ViewChild('employeeForm', {static: false}) public createEmployeeForm: NgForm;
+previewPhoto: boolean; 
 dateOfBirth: Date = new Date(2019, 0, 30);
 datePickerConfig: Partial<BsDatepickerConfig>;
+employee: Employee = {
+    id: null,
+    name: null,
+    gender: null,
+    contactPreference: null,
+    email: '',
+    dateOfBirth: null,
+    department: 'select',
+    isActive: null,
+    photoPath: null
+};
+
 departments: Department[] = [
   { id: 1, name: 'IT'},
   { id: 2, name: 'Development'},
