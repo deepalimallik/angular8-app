@@ -1,0 +1,150 @@
+<form #employeeForm="ngForm" (ngSubmit)="saveEmployee(employeeForm)">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Create Employee</h3>
+    </div>
+
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <input required id="fullName" name="name" [(ngModel)]="employee.name"
+        type="text" class="form-control">
+      </div>
+
+      <!-- <table border=1 style="border-collapse: collapse; font-family:Arial; table-layout: fixed">
+        <tr style="background-color: rgb(118, 175, 197); font-weight: bold">
+          <td colspan="3" style="padding:3px; white-space:nowrap; width:100%">
+            <h4>Full Name Field</h4>
+          </td>
+        </tr>
+        <tr style="background-color: rgb(218, 233, 236); font-weight: bold">
+          <td style="padding:10px; white-space:nowrap; width:33%">
+              <div>touched: {{ fullname.touched }}</div>
+              <div>untouched: {{ fullname.untouched }}</div>
+          </td>
+          <td style="padding:10px; white-space:nowrap; width:33%">
+              <div>pristine: {{ fullname.pristine }}</div>
+              <div>dirty: {{ fullname.dirty }}</div>
+          </td>
+          <td style="padding:10px; white-space:nowrap; width:33%">
+              <div>valid: {{ fullname.valid }}</div>
+              <div>invalid: {{ fullname.invalid }}</div>
+          </td>
+        </tr>
+      </table>
+      <br/>
+
+      <table border=1 style="border-collapse: collapse; font-family:Arial; table-layout: fixed">
+          <tr style="background-color: rgb(118, 175, 197); font-weight: bold">
+            <td colspan="3" style="padding:3px; white-space:nowrap; width:100%">
+              <h4>Employee Form</h4>
+            </td>
+          </tr>
+          <tr style="background-color: rgb(218, 233, 236); font-weight: bold">
+            <td style="padding:10px; white-space:nowrap; width:33%">
+                <div>touched: {{ employeeForm.touched }}</div>
+                <div>untouched: {{ employeeForm.untouched }}</div>
+            </td>
+            <td style="padding:10px; white-space:nowrap; width:33%">
+                <div>pristine: {{ employeeForm.pristine }}</div>
+                <div>dirty: {{ employeeForm.dirty }}</div>
+            </td>
+            <td style="padding:10px; white-space:nowrap; width:33%">
+                <div>valid: {{ employeeForm.valid }}</div>
+                <div>invalid: {{ employeeForm.invalid }}</div>
+            </td>
+          </tr>
+        </table> -->
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" required name="email" [(ngModel)]="employee.email" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input id="phoneNumber" name="phoneNumber" [(ngModel)]="employee.phoneNumber" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>Contact Preference</label>
+        <div class="form-control">
+          <label class="radio-inline">
+            <input type="radio" name="contactPreference" value="email" [(ngModel)]="employee.contactPreference">
+            Email
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="contactPreference" value="phone" [(ngModel)]="employee.contactPreference">
+            Phone
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Gender</label>
+        <div class="form-control">
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="male" [(ngModel)]="employee.gender">
+            Male
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="gender" value="female" [(ngModel)]="employee.gender">
+            Female
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="form-control">
+          <label class="checkbox-inline">
+            <input type="checkbox" name="isActive" [(ngModel)]="employee.isActive">
+            is Active
+          </label>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="department">
+          Department
+        </label>
+        <select id="department" name="department" [(ngModel)]="employee.department" class="form-control">
+          <option *ngFor="let dep of departments" [value]="dep.id">
+            {{dep.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-5">
+          <label for="dateOfBirth">Date of Birth</label>
+          <input id="dateOfBirth" name="dateOfBirth" [(ngModel)]="employee.dateOfBirth" placement="right" type="text"
+            [bsConfig]="datePickerConfig" class="form-control" bsDatepicker>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="photoPath">Photo Path</label>
+        <input id="photoPath" name="photoPath" [(ngModel)]="employee.photoPath" type="text" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <img [src]="employee.photoPath" height="200" width="200" *ngIf="previewPhoto" />
+      </div>
+
+      <div class="form-group">
+        <button type="button" (click)="togglePhotoPreview()" class="btn btn-primary">
+          {{previewPhoto? "Hide": "Show"}} Preview
+        </button>
+      </div>
+
+
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</form>
+
+Angular Generated Form Model: {{employeeForm.value | json}}
