@@ -5,10 +5,10 @@
         <a routerLink="list" >List</a>
       </li>
       <li>
-          <a routerLink="create" >Create</a>
+          <a routerLink="edit/0" >Create</a>
         </li>
         <li>
-          <a href="http://pragimtech.com" >PragimTech</a>
+          <a [routerLink]="['/employees', 2]" >Get Employee with Id 2</a>
         </li>
     </ul>
 </nav>

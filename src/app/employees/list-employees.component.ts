@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from './employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-employees',
@@ -9,14 +10,15 @@ import { EmployeeService } from './employee.service';
 })
 export class ListEmployeesComponent implements OnInit {
 employees: Employee[];
-dataFromChild: Employee;
+searchTerm: string;
+//dataFromChild: Employee;
 // emplyeeToDisplay: Employee;
 // private arrayIndex = 1;
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private router: Router) { }
 
   ngOnInit() {
-   this.employees = this.employeeService.getEmployees();
+   this.employeeService.getEmployees().subscribe(empList => this.employees = empList);
   // this.emplyeeToDisplay = this.employees[0];
   }
 
@@ -30,8 +32,12 @@ dataFromChild: Employee;
   //   }
   // }
 
-  handleNotify(eventData: Employee) {
-    this.dataFromChild = eventData;
+  // handleNotify(eventData: Employee) {
+  //   this.dataFromChild = eventData;
+  // }
+
+  onClick(employeeId: number) {
+    this.router.navigate(['/employees', employeeId]);
   }
 
 }

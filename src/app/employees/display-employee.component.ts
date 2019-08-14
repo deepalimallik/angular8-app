@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { Employee } from '../models/employee.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { EmployeeService } from './employee.service';
 
 
 @Component({
@@ -10,10 +12,12 @@ import { Employee } from '../models/employee.model';
 export class DisplayEmployeeComponent implements OnInit { //, OnChanges
   @Input() employee: Employee;
   @Output() notify: EventEmitter<Employee> = new EventEmitter<Employee>();
+  private selectedEmployeeId: number;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute, private router: Router, private employeeService: EmployeeService) { }
 
   ngOnInit() {
+    this.selectedEmployeeId = +this.route.snapshot.paramMap.get('id');
   }
 
   // ngOnChanges(changes: SimpleChanges) {
@@ -25,8 +29,20 @@ export class DisplayEmployeeComponent implements OnInit { //, OnChanges
 
   // }
 
-  handleClick() {
-    this.notify.emit(this.employee);
+  // handleClick() {
+  //   this.notify.emit(this.employee);
+  // }
+
+  viewEmployee() {
+    this.router.navigate(['/employees', this.employee.id]);
+  }
+
+  editEmployee() {
+    this.router.navigate(['/edit', this.employee.id]);
+  }
+
+  deleteEmployee() {
+    this.employeeService.deleteEmployee(this.employee.id);
   }
 
 }
