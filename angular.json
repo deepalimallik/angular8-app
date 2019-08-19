@@ -144,6 +144,14 @@
           }
         }
       }
-    }},
-  "defaultProject": "AngularCrud"
+    }
+  },
+  "defaultProject": "AngularCrud",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "spec": true
+      }
+    }
+  }
 }
